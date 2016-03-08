@@ -1,0 +1,42 @@
+public class Solution {
+    public boolean isAnagram(String s, String t) {
+        HashMap<Character, Integer> firstWord = new HashMap<Character, Integer>();
+        Character currChar = null;
+        
+        //Check if their lengths are the same
+        if (s.length() != t.length())
+            return false;
+        
+        //Place first word into HashMap, O(N) time
+        for (int i=0; i<s.length(); i++){
+            currChar = s.charAt(i); 
+            if (firstWord.containsKey(currChar)){
+                int tempNum = firstWord.get(currChar) + 1;
+                firstWord.put(currChar,tempNum);
+            }
+            else
+                firstWord.put(currChar, 1);
+        }
+        
+        //Iterate through second word
+        for (int i=0; i<t.length(); i++){
+            //If the character is not in the Hashmap, return false
+            currChar = t.charAt(i);
+            
+            if (firstWord.containsKey(currChar)){
+                int tempNum = firstWord.get(currChar) - 1;
+                if (tempNum == 0)
+                    firstWord.remove(currChar);
+                else
+                    firstWord.put(currChar, tempNum);
+            }
+            else
+                return false;
+        }
+        
+        if (firstWord.size() == 0)
+            return true;
+        
+        return false;
+    }
+}
