@@ -1,0 +1,32 @@
+public class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        Boolean [] usedChar = new Boolean[256];
+        for (int i=0; i<256; i++){
+            usedChar[i] = false;
+        }
+        int startIndex=0, maxLength=0;
+        
+        char [] inputString = s.toCharArray();
+        
+        for (int i=0; i<s.length(); i++){
+            Character currChar = inputString[i];
+            
+            if (usedChar[currChar]){
+                maxLength = Math.max(maxLength, i-startIndex);
+                for (int k=startIndex; k<i; k++){
+                    if (inputString[k] == currChar){
+                        startIndex = k+1;
+                        break;
+                    }
+                    usedChar[inputString[k]] = false;
+                }
+            }
+            else{
+                usedChar[currChar] = true;
+            }
+        }
+        
+        maxLength = Math.max(maxLength, s.length()-startIndex);
+        return maxLength;
+    }
+}
