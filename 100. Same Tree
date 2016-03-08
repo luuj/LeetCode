@@ -1,0 +1,35 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+        boolean rootTrue = false;
+        boolean leftTrue = false;
+        boolean rightTrue = false;
+        
+        if (p==null && q==null)
+            return true;
+        else if (p==null || q==null)
+            return false;
+        
+        //If given nodes are the same, mark them as same
+        if (p.val == q.val)
+            rootTrue = true;
+        else
+            return false;
+            
+        leftTrue = isSameTree(p.left, q.left);
+        rightTrue = isSameTree(p.right, q.right);
+        
+        if (rightTrue == true && leftTrue == true && rootTrue == true)
+            return true;
+            
+        return false;    
+    }
+}
