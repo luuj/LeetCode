@@ -1,0 +1,32 @@
+public class Solution {
+    public int removeDuplicates(int[] nums) {
+        if (nums.length == 0 || nums.length == 1)
+            return nums.length;
+            
+        int i=1, swapIndex=0;
+        int length=1;
+        boolean foundRepeat = false;
+        
+        while (i < nums.length){
+            if (nums[i] != nums[swapIndex]){
+                swapIndex++;
+                length++;
+                if (foundRepeat = true){
+                    swapNums(nums, i, swapIndex);
+                }
+            }
+            else{
+                foundRepeat = true;
+            }
+            i++;
+        }
+        
+        return length;
+    }
+    
+    public void swapNums(int[] nums, int indexOne, int indexTwo){
+        int temp = nums[indexOne];
+        nums[indexOne] = nums[indexTwo];
+        nums[indexTwo] = temp;
+    }
+}
