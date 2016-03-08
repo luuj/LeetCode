@@ -1,0 +1,30 @@
+public class Solution {
+    public int strStr(String haystack, String needle) {
+        //If needle>haystack, return false
+        if (needle.length() > haystack.length())
+            return -1;
+        
+        HashMap<String, Boolean> findNeedle = new HashMap<String, Boolean>();
+        findNeedle.put(needle, true);
+        
+        StringBuffer sb = new StringBuffer();
+        
+        for (int i=0; i<needle.length(); i++)
+            sb.append(haystack.charAt(i));
+        
+        int i=0;
+        for (i=needle.length(); i<haystack.length(); i++){
+            if (findNeedle.containsKey(sb.toString()))
+                return (i-needle.length());
+            else{
+                sb.deleteCharAt(0);
+                sb.append(haystack.charAt(i));
+            }
+        }
+        
+        if (findNeedle.containsKey(sb.toString()))
+            return (i-needle.length());
+        
+        return -1;
+    }
+}
