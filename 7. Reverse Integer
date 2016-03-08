@@ -1,0 +1,33 @@
+public class Solution {
+    public int reverse(int x) {
+        Integer transferX = x;
+        String num = transferX.toString();
+        int currPosition = 0;
+        boolean isNegative = false;
+        
+        StringBuilder sb = new StringBuilder();
+        
+        if (num.charAt(0) == '-'){
+            isNegative = true;
+            currPosition = 1;    
+        }
+        else if (num.charAt(0) == '+'){
+            currPosition = 1;
+        }
+        
+        for (int i=currPosition; i<num.length(); i++){
+            sb.insert(0, num.charAt(i));
+        }
+        
+        try {
+            transferX = Integer.parseInt(sb.toString());
+            if (isNegative == true){
+                transferX = -transferX;
+            }
+        }catch(Exception e){
+            return 0;
+        }
+        
+        return transferX;
+    }
+}
