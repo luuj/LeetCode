@@ -1,0 +1,43 @@
+public class Solution {
+    public int removeElement(int[] nums, int val) {
+        if (nums.length == 0)
+            return nums.length;
+        if (nums.length == 1 && nums[0] == val)
+            return 0;
+        else if (nums.length == 1 && nums[0] != val)
+            return 1;
+            
+        int left=0, right=nums.length-1;
+
+        while (left < right){
+            right = findsLastIndex(nums, val, right);
+            
+            if (right <= left)
+                break;
+                
+            if (nums[left] == val)
+                swapItems(nums, left, right);
+
+            left++;    
+        }
+        
+        if (nums[left] != val)
+            left++;
+            
+        return left;
+    }
+    
+    public int findsLastIndex(int[] nums, int val, int currRight){
+        while(nums[currRight] == val && currRight>0){
+            currRight--;
+        }
+        
+        return currRight;
+    }
+    
+    public void swapItems(int[] nums, int leftIndex, int rightIndex){
+        int temp = nums[leftIndex];
+        nums[leftIndex] = nums[rightIndex];
+        nums[rightIndex] = temp;
+    }
+}
