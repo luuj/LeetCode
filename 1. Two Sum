@@ -1,0 +1,16 @@
+public class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        HashMap<Integer, Integer> sumFinder = new HashMap<Integer, Integer>();
+        int partialVal;
+        
+        for (int i=0; i<nums.length; i++){
+            partialVal = target - nums[i];
+            if (sumFinder.containsKey(partialVal)){
+                int [] returnSum = {i, sumFinder.get(partialVal)};
+                return returnSum;
+            }
+            sumFinder.put(nums[i], i);
+        }
+        return null;
+    }
+}
