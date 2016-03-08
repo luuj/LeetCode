@@ -1,0 +1,50 @@
+public class Solution {
+    public void moveZeroes(int[] nums) {
+        //Check if nums is empty or only has one value
+        if (nums.length == 0 || nums.length == 1)
+            return;
+        
+        int swapIndex = findZero(nums, 0);
+        int currIndex = findNonZero(nums, swapIndex);
+        
+        while (currIndex < nums.length){
+            if (swapIndex == -1 || currIndex == -1)
+                return;
+            
+            swapValues(nums, swapIndex, currIndex);
+            currIndex = findNonZero(nums, currIndex);
+            swapIndex = findZero(nums, swapIndex);
+        }
+    }
+
+    public int findZero(int[] nums, int startIndex){
+        //If no more values to look for
+        if (startIndex > nums.length-1)
+            return -1;
+            
+        for (int i=startIndex; i<nums.length; i++){
+            if (nums[i] == 0)
+                return i;
+        }
+        
+        return -1;
+    }
+    
+    public int findNonZero(int[] nums, int startIndex){
+        if (startIndex > nums.length-1 || startIndex==-1)
+            return -1;
+            
+        for (int i=startIndex; i<nums.length; i++){
+            if (nums[i] != 0)
+                return i;
+        }
+        
+        return -1;    
+    }
+    
+    public void swapValues(int[] nums, int one, int two){
+        int temp = nums[one];
+        nums[one] = nums[two];
+        nums[two] = temp;
+    }
+}
